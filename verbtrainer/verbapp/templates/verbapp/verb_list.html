@@ -5,7 +5,7 @@
   <ul>
     {% for verb in verbs %}
       <li>
-        <a href="{% url 'verb_edit' verb.id %}">
+        <a href="{% url 'verbapp:verb_edit' verb.id %}">
           {{ verb.base }} ({{ verb.translation }})
         </a> - {{ verb.past_simple }} - {{ verb.past_participle }}
       </li>

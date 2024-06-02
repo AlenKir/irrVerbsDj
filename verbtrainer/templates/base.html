@@ -6,7 +6,12 @@
     <title>{% block title %}Irregular Verbs Trainer{% endblock %}</title>
 </head>
 <body>
-    <header></header>
+    <header>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'verbapp:verb_list' %}">Verb List</a>
+        <a href="{% url 'verbapp:trainer' %}">Trainer</a>
+        <a href="{% url 'verbapp:verb_add' %}">Add Verb</a>
+    </header>
 
     <main>
         {% block content %}
