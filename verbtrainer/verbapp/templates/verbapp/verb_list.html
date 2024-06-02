@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>List of Irregular Verbs Available</h2>
+  <ul>
+    {% for verb in verbs %}
+      <li>
+        <a href="{% url 'verb_edit' verb.id %}">
+          {{ verb.base }} ({{ verb.translation }})
+        </a> - {{ verb.past_simple }} - {{ verb.past_participle }}
+      </li>
+    {% empty %}
+      <li>No verbs found.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

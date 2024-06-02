@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        input.error-input {
+            background-color: #ffb2a6;
+        }
+        input {
+            background-color: #a5d6a7;
+            border: 1px solid #bdbdbd;
+            border-radius: 5px;
+            cursor: not-allowed;
+            text-align: center;
+        }
+        .center {
+            text-align: center;
+            margin: auto;
+            width: 50%;
+        }
+        form {
+            padding: 50px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            margin-top: 50px;
+        }
+        form input {
+            display: block;
+            width: calc(100% - 40px);
+            margin: 10px auto;
+            padding: 10px;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    form.submit();
+                }
+            });
+        });
+    </script>
+
+     <form method="get" class="center">
+        <div>
+            {% if is_correct is True %}
+                <p>Correct!</p>
+            {% elif is_correct is False %}
+                <p>Wrong!</p>
+            {% endif %}
+        </div>
+        {% for field in form %}
+         <p class="center">
+             <input type="{{ field.field.widget.input_type }}"
+                    value="{{ field.value|default_if_none:'' }}"
+                    class="{% if field.name in wrong_fields %}error-input{% endif %}">
+         </p>
+        {% endfor %}
+        <button type="submit">Next</button>
+    </form>
+{% endblock %}
