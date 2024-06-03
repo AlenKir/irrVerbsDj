@@ -1,0 +1,42 @@
+input[readonly] {
+    background-color: #e0e0e0;
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    cursor: not-allowed;
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+    margin: auto;
+    width: 50%;
+}
+
+form {
+    padding: 50px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-top: 50px;
+}
+
+form input {
+    display: block;
+    width: calc(100% - 40px);
+    margin: 10px auto;
+    padding: 10px;
+}
+
+input.error-input {
+    background-color: #ffb2a6;
+}
+
+input.correct-input {
+    background-color: #a5d6a7;
+}
+
+input {
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    text-align: center;
+}
