@@ -8,8 +8,8 @@ input[readonly] {
 
 .center {
     text-align: center;
-    margin: auto;
     width: 50%;
+    margin: auto;
 }
 
 form {
@@ -17,7 +17,7 @@ form {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
-    margin-top: 50px;
+    margin-top: 10%; /* Ensure this is not overridden */
 }
 
 form input {
@@ -39,4 +39,15 @@ input {
     border: 1px solid #bdbdbd;
     border-radius: 5px;
     text-align: center;
+}
+
+@media (max-width: 768px) {
+    form {
+        padding: 20px;
+        margin-top: 20%; /* Adjusted for smaller screens */
+    }
+
+    form input {
+        width: calc(100% - 20px);
+    }
 }
