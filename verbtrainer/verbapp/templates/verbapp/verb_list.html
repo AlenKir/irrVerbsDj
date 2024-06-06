@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="center">
   <h2>List of Irregular Verbs Available</h2>
-  <ul>
+  <ol>
     {% for verb in verbs %}
       <li>
         <a href="{% url 'verbapp:verb_edit' verb.id %}">
@@ -12,5 +13,6 @@
     {% empty %}
       <li>No verbs found.</li>
     {% endfor %}
-  </ul>
+  </ol>
+</div>
 {% endblock %}

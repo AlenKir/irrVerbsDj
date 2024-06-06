@@ -2,6 +2,10 @@ body {
     margin: 0;
 }
 
+main {
+    margin: 3%;
+}
+
 .container {
     width: 90%;
     max-width: 1200px;
