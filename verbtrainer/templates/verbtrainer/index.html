@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Welcome to the Irregular Verbs Trainer</h1>
-<p>This is a simple application designed to help learn and practice irregular verbs.</p>
+<div class="center">
+    <h1>Welcome to the Irregular Verbs Trainer</h1>
+    <p>This is a simple application designed to help learn and practice irregular verbs.</p>
+    <form method="post" action="{% url 'index' %}">
+        {% csrf_token %}
+        <label for="level">Select how many forms you want to practice:</label>
+        <select id="level" name="level">
+            <option value="1" {% if level == "1" %}selected{% endif %}>One</option>
+            <option value="2" {% if level == "2" %}selected{% endif %}>Two</option>
+            <option value="3" {% if level == "3" %}selected{% endif %}>Three</option>
+        </select>
+        <button type="submit">Set</button>
+    </form>
+</div>
 {% endblock %}
