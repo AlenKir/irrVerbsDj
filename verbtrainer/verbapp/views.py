@@ -36,7 +36,8 @@ class AddVerbView(CreateView):
 
 class TrainerView(View):
     def get(self, request):
-        task, guess_forms, translation = IrregularVerb.get_random_verb_as_task()
+        level = int(request.session.get('level', 1))
+        task, guess_forms, translation = IrregularVerb.get_random_verb_as_task(level)
         form = TrainerForm(initial=task, editable_fields=guess_forms)
         return render(request, 'verbapp/trainer.html', {'form': form, 'translation': translation}, )
 
