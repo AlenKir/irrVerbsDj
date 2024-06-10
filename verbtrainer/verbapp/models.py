@@ -5,10 +5,10 @@ from django.forms import model_to_dict
 
 
 class IrregularVerb(models.Model):
-    base = models.CharField(max_length=100)
+    base = models.CharField(max_length=100, verbose_name="Infinitiv")
     translation = models.CharField(max_length=100)
-    past_simple = models.CharField(max_length=100)
-    past_participle = models.CharField(max_length=100)
+    past_simple = models.CharField(max_length=100, verbose_name="Präteritum")
+    past_participle = models.CharField(max_length=100, verbose_name="Partizip II")
 
     class Meta:
         unique_together = ('base', 'past_simple', 'past_participle')
