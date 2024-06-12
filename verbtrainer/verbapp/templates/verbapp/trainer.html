@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var firstTextInput = document.querySelector('input[type="text"]');
+        if (firstTextInput) {
+            firstTextInput.focus();
+        }
+    });
+</script>
 <div class="center">
      <form method="post" autocomplete="off">
         {% csrf_token %}
