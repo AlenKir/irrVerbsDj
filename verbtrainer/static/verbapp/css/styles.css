@@ -17,7 +17,7 @@ form {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
-    margin-top: 10%; /* Ensure this is not overridden */
+    margin-top: 10%;
 }
 
 form input {
@@ -50,4 +50,14 @@ input {
     form input {
         width: calc(100% - 20px);
     }
+}
+
+.low-score {
+    background-color: #ffb2a6;
+}
+.medium-score {
+    background-color: #fff9c4;
+}
+.high-score {
+    background-color: #a5d6a7;
 }
