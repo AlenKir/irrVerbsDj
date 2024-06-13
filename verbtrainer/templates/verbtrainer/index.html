@@ -4,6 +4,8 @@
 <div class="center">
     <h1>Welcome to the Irregular Verbs Trainer</h1>
     <p>This is a simple application designed to help learn and practice irregular verbs.</p>
+    <p>It's possible to add new verbs and edit existing ones. You can choose between only practicing one, two or all three forms at the same time.
+        There is a simple spaced repetition feature and on the list of verbs you can look up how well you know the forms for each.</p>
     <form method="post" action="{% url 'index' %}">
         {% csrf_token %}
         <label for="level">Select how many forms you want to practice:</label>
