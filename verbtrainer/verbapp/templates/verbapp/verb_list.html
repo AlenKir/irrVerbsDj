@@ -14,9 +14,9 @@
           class="high-score"
         {% endif %}
       >
-        <a href="{% url 'verbapp:verb_edit' verb.id %}">
-          {{ verb.base }} ({{ verb.translation }})
-        </a> - {{ verb.past_simple }} - {{ verb.past_participle }}
+        <a href="{% url 'verbapp:verb_edit' verb.id %}" class="link-wrapper">
+          {{ verb.base }} ({{ verb.translation }}) - {{ verb.past_simple }} - {{ verb.past_participle }}
+        </a>
       </li>
     {% empty %}
       <li>No verbs found.</li>
