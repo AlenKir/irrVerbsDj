@@ -3,7 +3,7 @@
 {% block content %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var firstTextInput = document.querySelector('input[type="text"]');
+        var firstTextInput = document.querySelector('input[type="text"]:not([readonly])');
         if (firstTextInput) {
             firstTextInput.focus();
         }
