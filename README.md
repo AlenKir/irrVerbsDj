@@ -11,7 +11,7 @@ Welcome to the Irregular Verbs Trainer repository. This is a simple web applicat
 
 ### Irregular Verbs Dataset
 
-It's possible to add irregular verbs from a CSV file included in the project (data/verbs.cvs), however it was scraped together from several sources and changed for personal convenience, may contain typos or mistakes.
+It's possible to add irregular verbs from a CSV file included in the project (data/verbs.csv), however it was scraped together from several sources and changed for personal convenience, may contain typos or mistakes.
 
 ```bash
 python manage.py loadverbs /path/to/your/irregular_verbs.csv
