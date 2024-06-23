@@ -9,7 +9,7 @@ Welcome to the Irregular Verbs Trainer repository. This is a simple web applicat
 - **Spaced Repetition:** Has a simple spaced repetition feature to reinforce learning.
 - **Track Progress:** Monitor progress by checking how familiar you are with each verb.
 
-## Irregular Verbs Dataset
+### Irregular Verbs Dataset
 
 It's possible to add irregular verbs from a CSV file included in the project (data/verbs.cvs), however it was scraped together from several sources and changed for personal convenience, may contain typos or mistakes.
 
