@@ -23,31 +23,6 @@ class IrregularVerb(models.Model):
     def get_verb_as_dict(self):
         return model_to_dict(self)
 
-    @staticmethod
-    def get_random_verb_as_task(user, hide_forms=1):
-        score_subquery = UserVerbStats.objects.filter(
-            verb=OuterRef('pk'), user=user
-        ).values('memory_score')[:1]
-        ordered_verbs = IrregularVerb.objects.annotate(
-            memory_score=Coalesce(Subquery(score_subquery), Value(0))
-        ).order_by('memory_score')
-
-        max_score = max(verb.memory_score for verb in ordered_verbs)
-        min_score = min(verb.memory_score for verb in ordered_verbs)
-        if max_score == 0 and min_score == 0:
-            max_score = 1e-6
-
-        if max_score == min_score:
-            weights = [1.0 for _ in ordered_verbs]
-        else:
-            weights = [
-                (max_score - verb.memory_score) / (max_score - min_score)
-                for verb in ordered_verbs
-            ]
-
-        chosen_verb = random.choices(ordered_verbs, weights=weights)[0]
-        return chosen_verb.get_task(hide_forms)
-
     def get_task(self, hide_forms=1):
         forms = ['base', 'past_simple', 'past_participle']
         random.shuffle(forms)
@@ -90,3 +65,27 @@ class UserVerbStats(models.Model):
         else:
             stats.memory_score -= errors
         stats.save()
+
+    @staticmethod
+    def get_random_verb_as_task(user, level=1):
+        score_subquery = UserVerbStats.objects.filter(
+            verb=OuterRef('pk'), user=user
+        ).values('memory_score')[:1]
+        verbs = IrregularVerb.objects.annotate(
+            memory_score=Coalesce(Subquery(score_subquery), Value(0))
+        )
+
+        max_score = max(verb.memory_score for verb in verbs)
+        min_score = min(verb.memory_score for verb in verbs)
+        if max_score == 0 and min_score == 0:
+            max_score = 1e-6
+        if max_score == min_score:
+            weights = [1.0 for _ in verbs]
+        else:
+            weights = [
+                (max_score - verb.memory_score) / (max_score - min_score)
+                for verb in verbs
+            ]
+
+        verb = random.choices(verbs, weights=weights)[0]
+        return verb.get_task(level)
