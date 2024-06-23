@@ -1,4 +1,5 @@
-from django.db.models import OuterRef, Subquery
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import OuterRef, Subquery, Value, IntegerField
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -10,15 +11,24 @@ from .models import IrregularVerb, UserVerbStats
 
 
 class IrregularVerbListView(ListView):
-    score_subquery = UserVerbStats.objects.filter(verb=OuterRef('pk')).values('memory_score')[:1]
-    queryset = IrregularVerb.objects.annotate(
-        memory_score=Subquery(score_subquery)
-    ).order_by('base')
     template_name = 'verbapp/verb_list.html'
     context_object_name = 'verbs'
 
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated:
+            score_subquery = UserVerbStats.objects.filter(
+                verb=OuterRef('pk'), user=user
+            ).values('memory_score')[:1]
+            queryset = IrregularVerb.objects.annotate(
+                memory_score=Subquery(score_subquery)
+            )
+        else:
+            queryset = IrregularVerb.objects.all()
+        return queryset.order_by('base')
 
-class VerbUpdateView(UpdateView):
+
+class VerbUpdateView(LoginRequiredMixin, UpdateView):
     model = IrregularVerb
     form_class = IrregularVerbForm
     template_name = 'verbapp/verb_edit.html'
@@ -30,14 +40,14 @@ class VerbUpdateView(UpdateView):
         return context
 
 
-class AddVerbView(CreateView):
+class AddVerbView(LoginRequiredMixin, CreateView):
     model = IrregularVerb
     form_class = IrregularVerbForm
     template_name = 'verbapp/verb_add.html'
     success_url = reverse_lazy('verb_list')
 
 
-class TrainerView(View):
+class TrainerView(LoginRequiredMixin, View):
     def get(self, request):
         level = int(request.session.get('level', 1))
         task, guess_forms, translation = UserVerbStats.get_random_verb_as_task(request.user, level)
