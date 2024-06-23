@@ -50,7 +50,9 @@ class TrainerView(View):
             id = form.cleaned_data['id']
             verb = IrregularVerb.objects.filter(id=id).first()
             results, wrong_fields = verb.check_forms(form.cleaned_data)
-            UserVerbStats.update_memory_score(request.user, verb, len(wrong_fields))
+            user_stats, created = UserVerbStats.objects.get_or_create(user=request.user, verb=verb)
+            user_stats.update_memory_score(len(wrong_fields))
+
             form = TrainerForm(initial=results)
             return render(request, 'verbapp/trainer_result.html',
                           {'form': form, 'is_correct': len(wrong_fields) == 0,

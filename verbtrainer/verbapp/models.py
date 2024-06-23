@@ -57,14 +57,12 @@ class UserVerbStats(models.Model):
     class Meta:
         unique_together = ('user', 'verb')
 
-    @staticmethod
-    def update_memory_score(user, verb, errors):
-        stats, created = UserVerbStats.objects.get_or_create(user=user, verb=verb)
+    def update_memory_score(self, errors):
         if errors == 0:
-            stats.memory_score += 1
+            self.memory_score += 1
         else:
-            stats.memory_score -= errors
-        stats.save()
+            self.memory_score -= errors
+        self.save()
 
     @staticmethod
     def get_random_verb_as_task(user, level=1):
