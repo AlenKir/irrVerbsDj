@@ -32,7 +32,7 @@ class VerbUpdateView(LoginRequiredMixin, UpdateView):
     model = IrregularVerb
     form_class = IrregularVerbForm
     template_name = 'verbapp/verb_edit.html'
-    success_url = reverse_lazy('verb_list')
+    success_url = reverse_lazy('verbapp:verb_list')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -44,7 +44,7 @@ class AddVerbView(LoginRequiredMixin, CreateView):
     model = IrregularVerb
     form_class = IrregularVerbForm
     template_name = 'verbapp/verb_add.html'
-    success_url = reverse_lazy('verb_list')
+    success_url = reverse_lazy('verbapp:verb_list')
 
 
 class TrainerView(LoginRequiredMixin, View):
